@@ -41,14 +41,14 @@ public:
             MakeEmpty();
     }
 
-    Type& FindMax() const
+    const Type& FindMax() const
     {
-        return FindMax(root_->right_)->data_;
+        return FindMax(root_)->data_;
     }
 
-    Type& FindMin() const
+    const Type& FindMin() const
     {
-        return FindMin(root_->left_)->data_;
+        return FindMin(root_)->data_;
     }
 
     void MakeEmpty()
@@ -124,18 +124,22 @@ private:
 
     BinaryNode* FindMax(BinaryNode* t) const
     {
-        if (t->right_ != nullptr)
+        if(t == nullptr)
+            return nullptr;
+        while(t->right_ != nullptr)
         {
-            return FindMax(t->right_);
+            t = t->right_;
         }
         return t;
     }
 
     BinaryNode* FindMin(BinaryNode* t) const
     {
-        if (t->left_ != nullptr)
+        if(t == nullptr)
+            return nullptr;
+        while(t->left_ != nullptr)
         {
-            return FindMax(t->left_);
+            t = t->left_;
         }
         return t;
     }
@@ -143,55 +147,40 @@ private:
     void Insert(const Type& item, BinaryNode*& t)
     {
         if (t == nullptr)
-        {
             t = new BinaryNode(item, nullptr, nullptr);
-        }
         if (item < t->data_)
-        {
             Insert(item, t->left_);
-        }
         if (t->data_ < item)
-        {
             Insert(item, t->right_);
-        }
     }
 
     void Insert(Type&& item, BinaryNode*& t)
     {
         if (t == nullptr)
-        {
             t = new BinaryNode(std::move(item), nullptr, nullptr);
-        }
         if (item < t->data_)
-        {
             Insert(std::forward<Type&&>(item), t->left_);
-        }
         if (t->data_ < item)
-        {
             Insert(std::forward<Type&&>(item), t->right_);
-        }
     }
 
     void Remove(const Type& item, BinaryNode*& t)
     {
         if (IsEmpty())
             return;
+        
         if (item < t->data_)
-        {
             Remove(item, t->left_);
-        }
-        if (t->data_ < item)
-        {
+        else if (t->data_ < item)
             Remove(item, t->right_);
-        }
-        if (t->left_ != nullptr && t->right_ != nullptr)
+        else if (t->left_ != nullptr && t->right_ != nullptr)
         {
-            t->data_ = FindMin(t->right_);
+            t->data_ = FindMin(t->right_)->data_;
             Remove(t->data_, t->right_);
         }
         else
         {
-            BinaryNode* OldNode(t);
+            BinaryNode* OldNode = t;
             t = (t->left_ != nullptr) ? t->left_ : t->right_;
             delete OldNode;
         }
