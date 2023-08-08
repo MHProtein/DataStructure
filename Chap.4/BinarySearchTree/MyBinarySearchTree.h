@@ -135,7 +135,7 @@ void MyBinarySearchTree<Comparable>::insert(Comparable&& x)
 template <typename Comparable>
 void MyBinarySearchTree<Comparable>::remove(const Comparable& x)
 {
-    remove(x);
+    remove(x, root_);
 }
 
 template <typename Comparable>
@@ -178,13 +178,14 @@ void MyBinarySearchTree<Comparable>::insert(Comparable&& x, BinaryNode*& t)
 template <typename Comparable>
 void MyBinarySearchTree<Comparable>::remove(const Comparable& x, BinaryNode*& t)
 {
-    if (t == nullptr)
+    if (isEmpty())
         return;
+    
     if (x < t->element_)
-        return remove(x, t->left_);
-    if (t->element_ < x)
-        return remove(x, t->right_);
-    if (t->right_ != nullptr && t->left_ != nullptr) //two children
+        remove(x, t->left_);
+    else if (t->element_ < x)
+        remove(x, t->right_);
+    else if (t->right_ != nullptr && t->left_ != nullptr) //two children
     {
         t->element_ = findMin(t->right_)->element_;
         remove(t->element_, t->right_);
