@@ -14,7 +14,7 @@ public:
 
     BinarySearchTree(const BinarySearchTree& bst)
     {
-        root_ = clone(bst);
+        root_ = clone(bst.root_);
     }
 
     BinarySearchTree(BinarySearchTree&& bst) noexcept : root_(std::move(bst.root_))
@@ -81,7 +81,7 @@ public:
 
     void PrintTree(std::ostream& out = std::cout)
     {
-        PrintTree(out, root_, "", true);
+        PrintTree(out, root_, "", false);
     }
 
 private:

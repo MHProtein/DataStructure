@@ -154,6 +154,7 @@
         </Link>
     </ItemDefinitionGroup>
     <ItemGroup>
+        <ClInclude Include="BinarySearchTree\AVLTree.h" />
         <ClInclude Include="BinarySearchTree\BinarySearchTree.h" />
         <ClInclude Include="BinarySearchTree\MyBinarySearchTree.h" />
     </ItemGroup>
