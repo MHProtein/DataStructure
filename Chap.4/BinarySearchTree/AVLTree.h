@@ -249,7 +249,7 @@ private:
         }
         Balance(t);
     }
-
+ 
     void PrintTree(std::ostream& out, AVLNode* t, std::string prefix, bool IsLeft)
     {
         if (t == nullptr)
