@@ -9,16 +9,28 @@ int main()
     AVLTree<int> tree;
 
     static std::default_random_engine e(time(nullptr));
-    for (int i = 0; i != 10; ++i)
-    {
-        tree.Insert(i);
-    }
+
+    tree.Insert(3);
+    tree.Insert(2);
+    tree.Insert(1);
+    tree.Insert(4);
+    tree.Insert(5);
+    tree.Insert(6);
+    tree.Insert(7);
+    tree.Insert(16);
+    tree.Insert(15);
+    tree.Insert(14);
+    tree.Insert(13);
+    tree.Insert(12);
+    tree.Insert(11);
+    tree.Insert(10);
+    tree.Insert(8);
+    tree.Insert(9);
+    tree.PrintTree();
     AVLTree<int> tree2 = tree;
     tree.Remove(5);
-    tree2.PrintTree();
+
     
-    std::cout << tree2.FindMax() << std::endl;
-    std::cout << tree2.FindMin() << std::endl;
 
     tree.MakeEmpty();
 }
